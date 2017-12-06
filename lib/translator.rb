@@ -77,9 +77,18 @@ class Translator
   end
 
   def eng_to_morse(letters)
-    letters.downcase.each_char.map do |letter|
-      letter = @eng_alphabet[letter]
+    letters.upcase.each_char.map do |letter|
+      letter = @eng_alphabet[letter] || " "
     end.join
+
+  end
+
+  def from_file(file_name)
+    text_file = File.open(file_name).read
+    text_file.each_line do |line|
+      eng_to_morse(line)
+    end
+
   end
 
 end
